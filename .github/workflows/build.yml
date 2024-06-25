@@ -1,4 +1,4 @@
-name: Electron Build and Package
+name: Electron Build and Release
 
 on:
   push:
@@ -10,13 +10,10 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest]
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Set up Node.js
@@ -27,11 +24,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Electron app
-        run: npm run make
+      - name: Build Electron app for Windows
+        run: npm run make -- --platform=win32
 
-      - name: Upload Artifact
+      - name: Build Electron app for macOS
+        run: npm run make -- --platform=darwin
+
+      - name: Build Electron app for Linux
+        run: npm run make -- --platform=linux
+
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: electron-build-${{ matrix.os }}
-          path: out/
+          name: electron-builds
+          path: |
+            out/make/**/*.zip
