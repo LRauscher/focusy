@@ -14,28 +14,34 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build Electron app for Windows
-        run: npm run make -- --platform=win32
+      - name: Build Electron app for Linux
+        run: npm run make:linux
 
       - name: Build Electron app for macOS
-        run: npm run make -- --platform=darwin
+        run: npm run make:macos
 
-      - name: Build Electron app for Linux
-        run: npm run make -- --platform=linux
-
-      - name: Upload Artifacts
+      - name: Upload Linux Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: electron-builds
+          name: linux-artifacts
           path: |
-            out/make/**/*.zip
+            out/make/**/*.deb
+            out/make/**/*.AppImage
+            out/make/**/*.dmg
+
+      - name: Upload macOS Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos-artifacts
+          path: |
+            out/make/**/*.dmg
