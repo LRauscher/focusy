@@ -42,16 +42,15 @@ jobs:
         run: npm run make:macos
 
       - name: Upload Linux Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: linux-artifacts
           path: |
             out/make/**/*.deb
             out/make/**/*.AppImage
-            out/make/**/*.dmg
 
       - name: Upload macOS Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: macos-artifacts
           path: |
