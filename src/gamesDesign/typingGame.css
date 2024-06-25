@@ -1,0 +1,33 @@
+#speedtestGame {
+    text-align: center;
+    margin: 20px auto;
+}
+
+#speedtestGame p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: var(--primary-text);
+}
+
+#speedtestGame h2 {
+    margin: 20px 0;
+    font-size: 24px;
+    color: #007BFF;
+}
+
+#speedtestInput {
+    width: 80%;
+    padding: 10px;
+    font-size: 18px;
+    margin: 10px 0;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+}
+
+#endScore {
+    font-size: 20px;
+    text-align: center;
+    margin: 40px;
+    font-weight: bold;
+    color: var(--primary-text);
+}

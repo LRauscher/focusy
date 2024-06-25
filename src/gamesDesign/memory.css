@@ -1,0 +1,21 @@
+#memoryMatchGame {
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(6, 60px);
+    gap: 10px;
+    margin: 10px;
+  }
+  .card {
+    width: 60px;
+    height: 60px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .matched {
+    background-color: #8BC34A;
+    cursor: default;
+  }
