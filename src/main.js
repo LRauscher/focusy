@@ -1,8 +1,9 @@
+import confetti from '../node_modules/canvas-confetti/dist/confetti.module.mjs';
+
 import { memoryMatchGame } from './gamesLogic/memory.js';
 import { wordle } from './gamesLogic/wordle.js';
 import { catchObjects } from './gamesLogic/catchObjects.js';
 import { speedtestGame } from './gamesLogic/typingGame.js';
-const confetti = require('canvas-confetti');
 
 // Get references to HTML elements
 const headerEl = document.getElementById('header');
@@ -321,7 +322,8 @@ function getQuitValue() {
         timerContainer.style.display = 'block';
         timerDivEl.style.display = 'flex';
         quitInput.value = ''; // Clear the text input value
-        counterDiv.textContent = '20'; // Reset the counter display
+        counterDivs.textContent = '20'; // Reset the counter display
+        stopCounter();
         resumeTimer();
       }
     }
