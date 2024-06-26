@@ -16,9 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check Node.js version
-        run: node --version
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -41,6 +38,9 @@ jobs:
       - name: Build Electron app for macOS
         run: npm run make:macos
 
+      - name: Zip macOS Artifacts
+        run: npm run zip-macos
+
       - name: Upload Linux Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -55,3 +55,4 @@ jobs:
           name: macos-artifacts
           path: |
             out/make/**/*.dmg
+            out/make/zip/**/*.zip
