@@ -93,6 +93,7 @@ header img {
   padding: 13px 19px;
   cursor: pointer;
   -webkit-app-region: no-drag; /* Prevents buttons from being draggable */
+  margin-bottom: 6px;
 }
 
 .start-buttons button:hover {
@@ -101,6 +102,7 @@ header img {
 
 .start-buttons p {
   font-size: 1.2em;
+  margin: 8px;
 }
 
 #timerContainer {
