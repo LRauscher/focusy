@@ -652,7 +652,7 @@ function displayRandomGame() {
         // Handle game finished logic here
         gamesContainer.innerHTML = `
         <div id="afterGame">
-          <p id="textEl">The game has finished. Do you want to play another? Or do you want to go back to focus?</p>
+          <p id="textEl">The task has finished. Do you want to play another? Or do you want to go back to focus?</p>
           <div afterGameBtnEl>
             <button id="playAnotherBtn">Play another</button>
             <button id="declineAnotherPlayBtn">Return to focus</button>

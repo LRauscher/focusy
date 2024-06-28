@@ -30,10 +30,10 @@ export function catchObjects(gamesContainer, gameFinishedCallback) {
     let lives = 3;
 
     const sounds = {
-        catch: new Audio('catch.mp3'),
-        collision: new Audio('collision.mp3'),
-        powerUp: new Audio('powerup.mp3'),
-        background: new Audio('background.mp3')
+        catch: new Audio('audios/catch.wav'),
+        collision: new Audio('audio/hit.wav'),
+        powerUp: new Audio('audio/bonus.wav'),
+        background: new Audio('audio/music.wav')
     };
 
     sounds.background.loop = true;
