@@ -569,7 +569,7 @@ const gamesContainer = document.getElementById('gamesContainer');
 const games = [
   {
     name: 'Wordle',
-    explanation: "Guess the 5-letter word within six attempts. Each guess must be a valid 5-letter word. The color of the tiles will change to show how close your guess was to the word.",
+    explanation: "Guess the searched word within six attempts. The color of the tiles will change to show how close your guess was to the word. Green means right character at the right place. Yellow means right character but wrong position",
     play: (callback) => wordle(gamesContainer, callback)
   },
   {
@@ -579,13 +579,13 @@ const games = [
   },
   {
     name: 'Catch the Objects',
-    explanation: 'Control a player at the bottom of the screen using the arrow keys to catch falling objects, aiming to increase your score by catching as many as possible while avoiding the black obstacles.',
+    explanation: 'Control a player at the bottom of the screen using the arrow keys to catch falling objects. Increase your score by catching as many objects as possible while avoiding the black obstacles.',
     play: (callback) => catchObjects(gamesContainer, callback)
   },
   {
     name: 'Speedtest',
-    explanation: 'Type the displayed words as quickly as you can within 30 seconds to see how many you can get right!',
-    play: (callback => speedtestGame(gamesContainer, callback))
+    explanation: 'Type the displayed words as quickly as you can within 60 seconds. Press the spacebar to submit your word. Correct letters will be highlighted in green and incorrect letters in red. Try to get as many words right as possible!',
+    play: (callback) => speedtestGame(gamesContainer, callback)
   },
 ];
 

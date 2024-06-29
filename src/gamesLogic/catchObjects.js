@@ -31,9 +31,9 @@ export function catchObjects(gamesContainer, gameFinishedCallback) {
 
     const sounds = {
         catch: new Audio('audios/catch.wav'),
-        collision: new Audio('audio/hit.wav'),
-        powerUp: new Audio('audio/bonus.wav'),
-        background: new Audio('audio/music.wav')
+        collision: new Audio('audios/hit.wav'),
+        powerUp: new Audio('audios/bonus.wav'),
+        background: new Audio('audios/music.wav')
     };
 
     sounds.background.loop = true;
