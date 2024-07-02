@@ -1,0 +1,36 @@
+#minesweeper-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #minesweeper-board {
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  #minesweeper-board td {
+    border: 1px solid #ccc;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    position: relative;
+  }
+  
+  #minesweeper-board .revealed {
+    background-color: #ddd;
+  }
+  
+  #reset-minesweeper {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  #reset-minesweeper:hover {
+    background-color: #45a049;
+  }
