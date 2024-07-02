@@ -1,4 +1,6 @@
 import confetti from '../node_modules/canvas-confetti/dist/confetti.module.mjs';
+import { Chess } from '../node_modules/chess.js/dist/cjs/chess.js';
+// import { ChessBoard } from '../node_modules/chessboardjs/pages';
 
 import { memoryMatchGame } from './gamesLogic/memory.js';
 import { wordle } from './gamesLogic/wordle.js';

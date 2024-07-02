@@ -1,43 +1,42 @@
 export function chessGame(container, callback) {
-    container.innerHTML = `
-      <div id="chess-game">
-        <div id="board"></div>
-        <button id="reset-game">Reset Game</button>
-      </div>
-    `;
-  
-    const board = document.getElementById('board');
-    const resetGameBtn = document.getElementById('reset-game');
-  
-    const game = new Chess();
-    const boardConfig = {
-      draggable: true,
-      position: 'start',
-      onDrop: (source, target) => {
-        const move = game.move({
-          from: source,
-          to: target,
-          promotion: 'q'
-        });
-  
-        if (move === null) return 'snapback';
-  
-        if (game.game_over()) {
-          setTimeout(() => {
-            alert('Game Over');
-            callback();
-          }, 200);
-        }
+  const chess = new chess();
+  const board = Chessboard(container, {
+    draggable: true,
+    position: 'start',
+    onDrop: (source, target) => {
+      const move = chess.move({
+        from: source,
+        to: target,
+        promotion: 'q' // Always promote to a queen for simplicity
+      });
+
+      if (move === null) return 'snapback';
+
+      // Check for game end conditions
+      if (chess.in_checkmate()) {
+        alert('Checkmate! Game over.');
+      } else if (chess.in_draw()) {
+        alert('Draw! Game over.');
+      } else if (chess.in_stalemate()) {
+        alert('Stalemate! Game over.');
+      } else if (chess.in_threefold_repetition()) {
+        alert('Threefold repetition! Game over.');
+      } else if (chess.insufficient_material()) {
+        alert('Insufficient material! Game over.');
       }
-    };
-  
-    const chessboard = Chessboard(board, boardConfig);
-  
-    resetGameBtn.addEventListener('click', () => {
-      game.reset();
-      chessboard.start();
-    });
-  
-    // Call callback when game is over (you need to define when that happens)
-    // callback();
-  }  
+
+      // Call the callback function if provided
+      if (callback) callback();
+    }
+  });
+
+  // Reset button
+  const resetButton = document.createElement('button');
+  resetButton.textContent = 'Reset Game';
+  resetButton.addEventListener('click', () => {
+    chess.reset();
+    board.start();
+  });
+
+  container.appendChild(resetButton);
+}
