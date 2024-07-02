@@ -31,7 +31,6 @@ const returnYesBtn = document.getElementById('returnYes');
 const FocusTextEl = document.getElementById('whyEl');
 const counterDivs = document.querySelectorAll('.counter');
 const completeFocusEl = document.getElementById('focusTimeDisplay');
-const totalFocusEl = document.getElementById('totalTimeDisplay');
 
 if (!timerDisplay || !btnDivEl || focusButtons.length === 0) {
   console.error("One or more key elements not found in the DOM.");
@@ -47,7 +46,7 @@ let durationValue = durationInputEl.value;
 const quitText = 'i want to give up!';
 let progressWidth = 0;
 let totalFocusTime = 0;
-let allTimeFocus = 0;
+ 
 
 // Function to make the 20-second timer
 function counter(counterDivs) {
@@ -111,7 +110,6 @@ function startTimer(durationValue) {
   timerInterval = setInterval(() => {
     timeRemaining--; // Decrease the time remaining
     totalFocusTime++;
-    allTimeFocus++;
     updateDisplay(initialDuration); // Update the timer display
     if (randomTimes.includes(timeRemaining)) {
       triggerRandomEvent(); // Trigger your random event here
@@ -138,7 +136,6 @@ function saveTotalFocusTime() {
   const focusData = {
     date: new Date().toDateString(),
     time: totalFocusTime,
-    allTime: allTimeFocus,
   };
   localStorage.setItem('totalFocusTime', JSON.stringify(focusData));
 }
@@ -146,14 +143,13 @@ function saveTotalFocusTime() {
 function loadTotalFocusTime() {
   const savedData = localStorage.getItem('totalFocusTime');
   if (savedData) {
-    const { date, time, allTime } = JSON.parse(savedData);
+    const { date, time } = JSON.parse(savedData);
     const today = new Date().toDateString();
     if (date === today) {
       totalFocusTime = time;
     } else {
       totalFocusTime = 0;
     }
-    allTimeFocus = allTime || 0;
   }
 }
 
@@ -163,14 +159,6 @@ function displayTotalFocusTime() {
   const seconds = totalFocusTime % 60;
   const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   completeFocusEl.textContent = `${formattedTime}`;
-}
-
-function displayAllFocusTime() {
-  const hours = Math.floor(allTimeFocus / 3600);
-  const minutes = Math.floor((allTimeFocus % 3600) / 60);
-  const seconds = allTimeFocus % 60;
-  const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-  totalFocusEl.textContent = `${formattedTime}`;
 }
 
 // Function to update the timer display
@@ -184,7 +172,6 @@ function updateDisplay(initialDuration) {
   progressWidth = progressPercentage;
 
   displayTotalFocusTime();
-  displayAllFocusTime();
 }
 
 function resetTimer() {
@@ -230,7 +217,6 @@ function resumeTimer() {
     timerInterval = setInterval(() => {
       timeRemaining--; // Decrease the time remaining
       totalFocusTime++;
-      allTimeFocus++;
       updateDisplay(initialDuration); // Update the timer display
       if (randomTimes.includes(timeRemaining)) {
         triggerRandomEvent(); // Trigger your random event here
@@ -306,7 +292,6 @@ function quitTimer() {
   console.log('quitting');
   stopTimer();
   resetTimer();
-  saveTotalFocusTime();
   quitDiv.style.display = 'none';
   timerContainer.style.display = 'none';
   timerDivEl.style.display = 'none';
@@ -332,7 +317,6 @@ function getQuitValue() {
       let quitValueEl = quitInput.value;
       if (quitText === quitValueEl) {
         quitTimer();
-        stopCounter();
       } else {
         quitDiv.style.display = 'none';
         timerContainer.style.display = 'block';
@@ -377,26 +361,6 @@ let msgArray = [
   'A break now, better focus later'
 ];
 
-function getBreakTime(duration) {
- 
-  switch (duration) {
-    case 3600: // 1 Stunde
-      breakTime = 300; // 10 Minuten Pause
-      break;
-    case 1800: // 2 Stunden
-      breakTime = 180; // 20 Minuten Pause
-      break;
-    case 900: // 3 Stunden
-      breakTime = 120; // 30 Minuten Pause
-      break;
-    default: // Für andere Dauer
-      breakTime = 60; // Standardmäßig 5 Minuten Pause
-      break;
-  }
-
-  return breakTime;
-}
-
 // Function to handle taking a break
 function breakTimer() {
   // Hide timer elements and display break elements
@@ -404,7 +368,7 @@ function breakTimer() {
   timerDivEl.style.display = 'none';
   timerContainer.style.display = 'none';
 
-  getBreakTime();
+  breakTime = 120; // Break time in seconds
   breakDisplay(); // Initial break display
   activateLights(6000, breakLights);
 
@@ -569,7 +533,7 @@ const gamesContainer = document.getElementById('gamesContainer');
 const games = [
   {
     name: 'Wordle',
-    explanation: "Guess the searched word within six attempts. The color of the tiles will change to show how close your guess was to the word. Green means right character at the right place. Yellow means right character but wrong position",
+    explanation: "Guess the 5-letter word within six attempts. Each guess must be a valid 5-letter word. The color of the tiles will change to show how close your guess was to the word.",
     play: (callback) => wordle(gamesContainer, callback)
   },
   {
@@ -579,13 +543,13 @@ const games = [
   },
   {
     name: 'Catch the Objects',
-    explanation: 'Control a player at the bottom of the screen using the arrow keys to catch falling objects. Increase your score by catching as many objects as possible while avoiding the black obstacles.',
+    explanation: 'Control a player at the bottom of the screen using the arrow keys to catch falling objects, aiming to increase your score by catching as many as possible while avoiding the black obstacles.',
     play: (callback) => catchObjects(gamesContainer, callback)
   },
   {
     name: 'Speedtest',
-    explanation: 'Type the displayed words as quickly as you can within 60 seconds. Press the spacebar to submit your word. Correct letters will be highlighted in green and incorrect letters in red. Try to get as many words right as possible!',
-    play: (callback) => speedtestGame(gamesContainer, callback)
+    explanation: 'Type the displayed words as quickly as you can within 30 seconds to see how many you can get right!',
+    play: (callback => speedtestGame(gamesContainer, callback))
   },
 ];
 
@@ -688,7 +652,7 @@ function displayRandomGame() {
         // Handle game finished logic here
         gamesContainer.innerHTML = `
         <div id="afterGame">
-          <p id="textEl">The task has finished. Do you want to play another? Or do you want to go back to focus?</p>
+          <p id="textEl">The game has finished. Do you want to play another? Or do you want to go back to focus?</p>
           <div afterGameBtnEl>
             <button id="playAnotherBtn">Play another</button>
             <button id="declineAnotherPlayBtn">Return to focus</button>
@@ -722,5 +686,4 @@ function displayRandomGame() {
 window.addEventListener('load', () => {
   loadTotalFocusTime();
   displayTotalFocusTime();
-  displayAllFocusTime();
 });

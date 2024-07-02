@@ -49,7 +49,7 @@
   }
 
   #correctGuess {
-    color: var(--primary-text);
+    color: green;
     text-align: center;
     margin: 40px;
     font-size: 2em;
@@ -57,7 +57,7 @@
   }
 
   #wrongGuess {
-    color: var(--primary-text);
+    color: red;
     text-align: center;
     margin: 40px;
     font-size: 2em;

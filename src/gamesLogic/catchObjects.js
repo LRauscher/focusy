@@ -9,35 +9,24 @@ export function catchObjects(gamesContainer, gameFinishedCallback) {
         height: 40,
         x: canvas.width / 2 - 25,
         y: canvas.height - 60,
-        speed: 6,
+        speed: 6, 
         dx: 0
     };
 
     const fallingObjects = [];
     const obstacles = [];
     const powerUps = [];
-    const objectSize = 30;
+    const objectSize = 30; 
     const obstacleSize = 20;
     const powerUpSize = 20;
-    const goalScore = 20;
+    const goalScore = 20; 
     let score = 0;
-    let objectSpeed = 1.5;
-    let obstacleSpeed = 1;
+    let objectSpeed = 1.5; 
+    let obstacleSpeed = 1; 
     let gameInterval;
     let createObjectInterval;
     let createObstacleInterval;
     let createPowerUpInterval;
-    let lives = 3;
-
-    const sounds = {
-        catch: new Audio('audios/catch.wav'),
-        collision: new Audio('audios/hit.wav'),
-        powerUp: new Audio('audios/bonus.wav'),
-        background: new Audio('audios/music.wav')
-    };
-
-    sounds.background.loop = true;
-    sounds.background.play();
 
     function drawPlayer() {
         ctx.fillStyle = '#3f8efc';
@@ -106,27 +95,18 @@ export function catchObjects(gamesContainer, gameFinishedCallback) {
             if (obj.y + objectSize > player.y && obj.x < player.x + player.width && obj.x + objectSize > player.x) {
                 fallingObjects.splice(index, 1);
                 score++;
-                sounds.catch.play();
                 if (score >= goalScore) {
                     endGame('win');
                 }
             } else if (obj.y > canvas.height) {
                 fallingObjects.splice(index, 1);
-                lives--;
-                if (lives <= 0) {
-                    endGame('lose');
-                }
+                endGame('lose');
             }
         });
 
         obstacles.forEach((obstacle, index) => {
             if (obstacle.y + obstacleSize > player.y && obstacle.x < player.x + player.width && obstacle.x + obstacleSize > player.x) {
-                obstacles.splice(index, 1);
-                lives--;
-                sounds.collision.play();
-                if (lives <= 0) {
-                    endGame('lose');
-                }
+                endGame('lose');
             } else if (obstacle.y > canvas.height) {
                 obstacles.splice(index, 1);
             }
@@ -136,7 +116,6 @@ export function catchObjects(gamesContainer, gameFinishedCallback) {
             if (powerUp.y + powerUpSize > player.y && powerUp.x < player.x + player.width && powerUp.x + powerUpSize > player.x) {
                 powerUps.splice(index, 1);
                 score += 2; // Bonus score for power-ups
-                sounds.powerUp.play();
                 if (score >= goalScore) {
                     endGame('win');
                 }
@@ -165,8 +144,7 @@ export function catchObjects(gamesContainer, gameFinishedCallback) {
     function drawScore() {
         ctx.fillStyle = '#000';
         ctx.font = '16px Inter';
-        ctx.fillText(`Score: ${score}`, 10, 20);
-        ctx.fillText(`Lives: ${lives}`, 10, 40);
+        ctx.fillText(`Score: ${score}`, 10, 30);
     }
 
     function update() {
@@ -181,16 +159,11 @@ export function catchObjects(gamesContainer, gameFinishedCallback) {
         moveObstacles();
         movePowerUps();
         detectCollision();
-
-        if (score >= goalScore) {
-            objectSpeed += 0.05;
-            obstacleSpeed += 0.05;
-        }
     }
 
     function startGame() {
         gameInterval = setInterval(update, 1000 / 60);
-        createObjectInterval = setInterval(createFallingObject, 1000);
+        createObjectInterval = setInterval(createFallingObject, 1000); 
         createObstacleInterval = setInterval(createObstacle, 2000); // Increased interval for obstacles
         createPowerUpInterval = setInterval(createPowerUp, 5000); // Create power-ups every 5 seconds
     }
@@ -202,7 +175,6 @@ export function catchObjects(gamesContainer, gameFinishedCallback) {
         clearInterval(createPowerUpInterval);
         document.removeEventListener('keydown', keyDown);
         document.removeEventListener('keyup', keyUp);
-        sounds.background.pause();
 
         // Display the result
         ctx.clearRect(0, 0, canvas.width, canvas.height);

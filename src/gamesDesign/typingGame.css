@@ -12,7 +12,7 @@
 #speedtestGame h2 {
     margin: 20px 0;
     font-size: 24px;
-    color: var(--primary-heading);
+    color: #007BFF;
 }
 
 #speedtestInput {
