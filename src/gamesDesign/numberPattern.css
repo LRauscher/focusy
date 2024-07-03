@@ -1,12 +1,6 @@
 #number-sequence-game {
-    max-width: 400px;
     margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
     text-align: center;
-    font-family: Arial, sans-serif;
 }
 
 #number-sequence-game h3 {
@@ -41,6 +35,6 @@
 }
 
 #sequence-result {
-    margin-top: 15px;
+    margin-top: 4px;
     font-weight: bold;
 }

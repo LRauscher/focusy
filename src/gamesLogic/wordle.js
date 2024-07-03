@@ -47,7 +47,7 @@ export function wordle(gamesContainer, gameFinishedCallback) {
         const guess = guessInput.value.toLowerCase();
         if (guess.length !== wordLength) {
             alert(`Please enter a ${wordLength}-letter word.`);
-            return;
+          //  return;
         }
 
         const rowStartIndex = currentRow * wordLength;

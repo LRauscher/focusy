@@ -603,7 +603,7 @@ const games = [
   {
     name: 'Number Sequence',
     explanation: 'Guess the next number in the sequence correctly to win.',
-    play: (callback) => numberSequenceGameFunction(gamesContainer, callback)
+    play: (callback) => numberSequence(gamesContainer, callback)
   },
 ];
 

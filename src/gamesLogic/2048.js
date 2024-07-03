@@ -165,6 +165,4 @@ export function game2048(container, callback) {
   addRandomTile();
   addRandomTile();
   initBoard();
-
-  return callback;
 }
