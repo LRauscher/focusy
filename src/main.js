@@ -1,15 +1,12 @@
 import confetti from '../node_modules/canvas-confetti/dist/confetti.module.mjs';
-import { Chess } from '../node_modules/chess.js/dist/cjs/chess.js';
-// import { ChessBoard } from '../node_modules/chessboardjs/pages';
 
 import { memoryMatchGame } from './gamesLogic/memory.js';
 import { wordle } from './gamesLogic/wordle.js';
 import { catchObjects } from './gamesLogic/catchObjects.js';
 import { speedtestGame } from './gamesLogic/typingGame.js';
-import { sudokuGame } from './gamesLogic/sudoku.js';
-import { chessGame } from './gamesLogic/chess.js';
 import { minesweeperGame } from './gamesLogic/minesweeper.js';
 import { game2048 } from './gamesLogic/2048.js';
+import { numberSequence } from './gamesLogic/numberPattern.js';
 
 // Get references to HTML elements
 const headerEl = document.getElementById('header');
@@ -594,16 +591,6 @@ const games = [
     play: (callback) => speedtestGame(gamesContainer, callback)
   },
   {
-    name: 'Sudoku',
-    explanation: 'Fill the 9x9 grid with digits so that each column, each row, and each of the nine 3x3 subgrids contain all of the digits from 1 to 9.',
-    play: (callback) => sudokuGame(gamesContainer, callback)
-  },
-  {
-    name: 'Chess',
-    explanation: 'Play a game of chess against an AI opponent or another player. Utilize strategy and tactics to checkmate your opponent.',
-    play: (callback) => chessGame(gamesContainer, callback)
-  },
-  {
     name: '2048',
     explanation: 'Combine tiles with the same number to merge them into one tile with the sum of the two numbers. Keep combining tiles to reach 2048!',
     play: (callback) => game2048(gamesContainer, callback)
@@ -612,7 +599,12 @@ const games = [
     name: 'Minesweeper',
     explanation: 'Reveal all the cells that do not contain mines without triggering any mines. Use the numbers to deduce the locations of the mines.',
     play: (callback) => minesweeperGame(gamesContainer, callback)
-  }
+  },
+  {
+    name: 'Number Sequence',
+    explanation: 'Guess the next number in the sequence correctly to win.',
+    play: (callback) => numberSequenceGameFunction(gamesContainer, callback)
+  },
 ];
 
 // Function to determine the number of random events based on duration

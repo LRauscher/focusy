@@ -5,17 +5,17 @@
   }
   
   #board-2048 {
-    width: 400px;
-    height: 400px;
+    width: 250px;
+    height: 250px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    gap: 5px;
+    gap: 1px;
   }
   
   #board-2048 .tile {
-    width: 100px;
-    height: 100px;
+    width: 35px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
