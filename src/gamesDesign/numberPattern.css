@@ -1,0 +1,40 @@
+#number-sequence-game {
+    margin: 20px auto;
+    text-align: center;
+}
+
+#number-sequence-game h3 {
+    color: #333;
+}
+
+#number-sequence-game p {
+    margin: 10px 0;
+}
+
+#sequence-input {
+    padding: 8px;
+    margin-top: 10px;
+    width: 100px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#submit-sequence {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#submit-sequence:hover {
+    background-color: #45a049;
+}
+
+#sequence-result {
+    margin-top: 4px;
+    font-weight: bold;
+}
