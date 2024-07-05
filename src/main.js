@@ -573,7 +573,10 @@ const games = [
   {
     name: 'Wordle',
     explanation: "Guess the searched word within six attempts. The color of the tiles will change to show how close your guess was to the word. Green means right character at the right place. Yellow means right character but wrong position",
-    play: (callback) => wordle(gamesContainer, callback)
+    play: (callback) => wordle(gamesContainer, (score) => {
+      updateHighScore('Wordle', score);
+      callback(score);
+    })
   },
   {
     name: 'Memory',
@@ -606,6 +609,24 @@ const games = [
     play: (callback) => numberSequence(gamesContainer, callback)
   },
 ];
+
+// Display the high score
+const displayHighScore = (gameName) => {
+  const highScore = localStorage.getItem(`${gameName}HighScore`) || 0;
+  const highScoreElement = document.createElement('div');
+  highScoreElement.id = `${gameName}HighScore`;
+  highScoreElement.innerText = `High Score: ${highScore}`;
+  return highScoreElement;
+}
+
+// Update the high score
+const updateHighScore = (gameName, score) => {
+  const highScore = localStorage.getItem(`${gameName}HighScore`) || 0;
+  if (score > highScore) {
+    localStorage.setItem(`${gameName}HighScore`, score);
+    document.getElementById(`${gameName}HighScore`).innerText = `High Score: ${score}`;
+  }
+}
 
 // Function to determine the number of random events based on duration
 function getEventCount(duration) {

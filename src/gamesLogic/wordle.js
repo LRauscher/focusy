@@ -47,7 +47,6 @@ export function wordle(gamesContainer, gameFinishedCallback) {
         const guess = guessInput.value.toLowerCase();
         if (guess.length !== wordLength) {
             alert(`Please enter a ${wordLength}-letter word.`);
-          //  return;
         }
 
         const rowStartIndex = currentRow * wordLength;
@@ -66,10 +65,12 @@ export function wordle(gamesContainer, gameFinishedCallback) {
 
         if (guess === correctWord) {
             submitButton.disabled = true;
-            gamesContainer.innerHTML = `<p id="correctGuess">Congratulations! You guessed the right word!</p>`;
+            saveHighScore('wordle', currentRow + 1);
+            gamesContainer.innerHTML = `<p id="correctGuess">Congratulations! You guessed the right word in ${currentRow + 1} attempts!</p>`;
             gameFinished = true;
             setTimeout(() => {
                 gameFinishedCallback(gameFinished);
+                displayHighScores();
             }, 2000);
         } else if (currentRow === 5) {
             submitButton.disabled = true;
@@ -77,6 +78,7 @@ export function wordle(gamesContainer, gameFinishedCallback) {
             gameFinished = true;
             setTimeout(() => {
                 gameFinishedCallback(gameFinished);
+                displayHighScores();
             }, 2000);
         } else {
             // Provide a hint
