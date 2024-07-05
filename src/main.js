@@ -575,6 +575,7 @@ const games = [
     explanation: "Guess the searched word within six attempts. The color of the tiles will change to show how close your guess was to the word. Green means right character at the right place. Yellow means right character but wrong position",
     play: (callback) => wordle(gamesContainer, (score) => {
       updateHighScore('Wordle', score);
+      displayHighScore(score);
       callback(score);
     })
   },
@@ -613,10 +614,7 @@ const games = [
 // Display the high score
 const displayHighScore = (gameName) => {
   const highScore = localStorage.getItem(`${gameName}HighScore`) || 0;
-  const highScoreElement = document.createElement('div');
-  highScoreElement.id = `${gameName}HighScore`;
-  highScoreElement.innerText = `High Score: ${highScore}`;
-  return highScoreElement;
+  return highScore;
 }
 
 // Update the high score

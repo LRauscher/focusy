@@ -70,15 +70,17 @@ export function wordle(gamesContainer, gameFinishedCallback) {
             gameFinished = true;
             setTimeout(() => {
                 gameFinishedCallback(gameFinished);
-                displayHighScores();
+                displayHighScore();
             }, 2000);
         } else if (currentRow === 5) {
-            submitButton.disabled = true;
-            gamesContainer.innerHTML = `<p id="wrongGuess">Game over! The right word was ${correctWord}</p>`;
-            gameFinished = true;
             setTimeout(() => {
-                gameFinishedCallback(gameFinished);
-                displayHighScores();
+            submitButton.disabled = true;
+            displayHighScore();
+            gamesContainer.innerHTML = `<p id="wrongGuess">Game over!
+             The right word was ${correctWord}
+             New Highscore: ${highScore}</p>`;
+            gameFinished = true;
+            gameFinishedCallback(gameFinished);
             }, 2000);
         } else {
             // Provide a hint
