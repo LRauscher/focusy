@@ -7,9 +7,6 @@ import { speedtestGame } from './gamesLogic/typingGame.js';
 import { minesweeperGame } from './gamesLogic/minesweeper.js';
 import { game2048 } from './gamesLogic/2048.js';
 import { numberSequence } from './gamesLogic/numberPattern.js';
-import { minesweeperGame } from './gamesLogic/minesweeper.js';
-import { game2048 } from './gamesLogic/2048.js';
-import { numberSequence } from './gamesLogic/numberPattern.js';
 
 // Get references to HTML elements
 const headerEl = document.getElementById('header');
@@ -585,50 +582,56 @@ const games = [
   {
     name: 'Memory',
     explanation: 'Memory Match is a fun game where you find and match pairs of cards with identical symbols on a 4x4 grid. Flip and match all pairs to win, testing and improving your memory skills!',
-    play: (callback) => memoryMatchGame(gamesContainer, callback)
+    play: (callback) => memoryMatchGame(gamesContainer, (score) => {
+      updateHighScore("Memory", score);
+      displayHighScore(score);
+      callback(score);
+    })
   },
   {
     name: 'Catch the Objects',
     explanation: 'Control a player at the bottom of the screen using the arrow keys to catch falling objects. Increase your score by catching as many objects as possible while avoiding the black obstacles.',
-    explanation: 'Control a player at the bottom of the screen using the arrow keys to catch falling objects. Increase your score by catching as many objects as possible while avoiding the black obstacles.',
-    play: (callback) => catchObjects(gamesContainer, callback)
+    play: (callback) => catchObjects(gamesContainer, (score) => {
+      updateHighScore('Catch the Objects', score);
+      displayHighScore(score);
+      callback(score);
+    })
   },
   {
     name: 'Speedtest',
     explanation: 'Type the displayed words as quickly as you can within 60 seconds. Press the spacebar to submit your word. Correct letters will be highlighted in green and incorrect letters in red. Try to get as many words right as possible!',
-    play: (callback) => speedtestGame(gamesContainer, callback)
+    play: (callback) => speedtestGame(gamesContainer, (score) => {
+      updateHighScore('Speedtest', score);
+      displayHighScore(score);
+      callback(score);
+    })
   },
   {
     name: '2048',
     explanation: 'Combine tiles with the same number to merge them into one tile with the sum of the two numbers. Keep combining tiles to reach 2048!',
-    play: (callback) => game2048(gamesContainer, callback)
+    play: (callback) => game2048(gamesContainer, (score) => {
+      updateHighScore('2048', score);
+      displayHighScore(score);
+      callback(score);
+    })
   },
   {
     name: 'Minesweeper',
     explanation: 'Reveal all the cells that do not contain mines without triggering any mines. Use the numbers to deduce the locations of the mines.',
-    play: (callback) => minesweeperGame(gamesContainer, callback)
+    play: (callback) => minesweeperGame(gamesContainer, (score) => {
+      updateHighScore('Minesweeper', score);
+      displayHighScore(score);
+      callback(score);
+    })
   },
   {
     name: 'Number Sequence',
     explanation: 'Guess the next number in the sequence correctly to win.',
-    play: (callback) => numberSequence(gamesContainer, callback)
-    explanation: 'Type the displayed words as quickly as you can within 60 seconds. Press the spacebar to submit your word. Correct letters will be highlighted in green and incorrect letters in red. Try to get as many words right as possible!',
-    play: (callback) => speedtestGame(gamesContainer, callback)
-  },
-  {
-    name: '2048',
-    explanation: 'Combine tiles with the same number to merge them into one tile with the sum of the two numbers. Keep combining tiles to reach 2048!',
-    play: (callback) => game2048(gamesContainer, callback)
-  },
-  {
-    name: 'Minesweeper',
-    explanation: 'Reveal all the cells that do not contain mines without triggering any mines. Use the numbers to deduce the locations of the mines.',
-    play: (callback) => minesweeperGame(gamesContainer, callback)
-  },
-  {
-    name: 'Number Sequence',
-    explanation: 'Guess the next number in the sequence correctly to win.',
-    play: (callback) => numberSequence(gamesContainer, callback)
+    play: (callback) => numberSequence(gamesContainer, (score) => {
+      updateHighScore('Number Sequence', score);
+      displayHighScore(score);
+      callback(score);
+    }),
   },
 ];
 

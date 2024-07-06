@@ -69,25 +69,20 @@ export function wordle(gamesContainer, gameFinishedCallback) {
 
         if (guess === correctWord) {
             submitButton.disabled = true;
-            saveHighScore('wordle', currentRow + 1);
+            updateHighScore('wordle', currentRow + 1);
             gamesContainer.innerHTML = `<p id="correctGuess">Congratulations! You guessed the right word in ${currentRow + 1} attempts!</p>`;
             gameFinished = true;
             setTimeout(() => {
-                submitButton.disabled = true;
-                updateHighScore('wordle', currentRow + 1);
-                gamesContainer.innerHTML = `<p id="correctGuess">Congratulations! You guessed the right word in ${currentRow + 1} attempts!</p>`;
-                gameFinished = true;
                 gameFinishedCallback(gameFinished);
-                displayHighScore("wordle");
             }, 2000);
         } else if (currentRow === 5) {
-            setTimeout(() => {
             submitButton.disabled = true;
-            displayHighScore();
+            displayHighScore("Wordle");
             gamesContainer.innerHTML = `<p id="wrongGuess">Game over!
              The right word was ${correctWord}
-             New Highscore: ${highScore}</p>`;
+             Highscore: ${highScore}</p>`;
             gameFinished = true;
+            setTimeout(() => {
             gameFinishedCallback(gameFinished);
             }, 2000);
         } else {
