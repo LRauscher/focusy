@@ -1,3 +1,5 @@
+import { updateHighScore, displayHighScore } from "../main.js";
+
 export function speedtestGame(container, callback) {
     // Clear the container
     container.innerHTML = '';
@@ -64,11 +66,14 @@ export function speedtestGame(container, callback) {
         if (timeRemaining <= 0) {
             clearInterval(intervalId);
             input.disabled = true;
-            container.innerHTML = `<p id="endScore">Time's up! You managed ${score} words! ${wrongWords} words were incorrect.</p>`;
+            updateHighScore('Speedtest', score);
+            displayHighScore('Speedtest');
+            container.innerHTML = `<p id="endScore">Time's up! You managed ${score} words! 
+            ${wrongWords} words were incorrect.</p>
+            <p>${displayHighScore.toString()} is your highscore`;
 
             // Display the score for a few seconds before clearing it
             setTimeout(() => {
-                container.innerHTML = '';
                 callback(true); // Indicate the game is finished
             }, 3000); // Display the score for 3 seconds
         }
