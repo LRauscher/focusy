@@ -101,7 +101,10 @@ export function minesweeperGame(container, callback) {
     }
 
     if (checkWin()) {
-      callback(true);
+      revealAllMines();
+      setTimeout(() => {
+        callback(true);
+      }, 3000);
     }
   }
 

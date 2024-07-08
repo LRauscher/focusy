@@ -6,7 +6,7 @@
   
   #minesweeper-board {
     border-collapse: collapse;
-    margin: 4px 0;
+    margin: 9px 0;
   }
   
   #minesweeper-board td {
