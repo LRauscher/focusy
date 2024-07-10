@@ -80,10 +80,9 @@ export function wordle(gamesContainer, gameFinishedCallback) {
             }, 2000);
         } else if (currentRow === 5) {
             submitButton.disabled = true;
-            displayHighScore("Wordle");
             gamesContainer.innerHTML = `<p id="wrongGuess">Game over!
              The right word was ${correctWord}
-             Highscore: ${highScore}</p>`;
+             Highscore: ${displayHighScore('Wordle')}</p>`;
             gameFinished = true;
             setTimeout(() => {
             gameFinishedCallback(gameFinished);

@@ -638,7 +638,8 @@ const games = [
 // Display the high score
 export const displayHighScore = (gameName) => {
   const highScore = localStorage.getItem(`${gameName}HighScore`) || 0;
-  return highScore;
+  let highScoreEl = JSON.parse(highScore);
+  return highScoreEl;
 }
 
 // Update the high score
@@ -646,7 +647,6 @@ export const updateHighScore = (gameName, score) => {
   const highScore = localStorage.getItem(`${gameName}HighScore`) || 0;
   if (score > highScore) {
       localStorage.setItem(`${gameName}HighScore`, score);
-      document.getElementById(`${gameName}HighScore`).innerText = `High Score: ${score}`;
   }
 };
 
