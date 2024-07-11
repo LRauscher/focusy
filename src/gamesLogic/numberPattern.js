@@ -94,6 +94,7 @@ export function numberSequence(container, callback) {
         }
 
         container.innerHTML = "";
+        container.id = "number-sequence-game";
 
         const sequenceText = document.createElement("div");
         sequenceText.innerHTML = currentSequence.join(", ");
@@ -101,13 +102,16 @@ export function numberSequence(container, callback) {
 
         const input = document.createElement("input");
         input.type = "text";
+        input.id= "sequence-input";
         container.appendChild(input);
 
         const submitButton = document.createElement("button");
         submitButton.innerHTML = "Submit";
+        submitButton.id = "submit-sequence";
         container.appendChild(submitButton);
 
         const result = document.createElement("div");
+        result.id = "sequence-result";
         container.appendChild(result);
 
         submitButton.addEventListener("click", () => {

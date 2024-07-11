@@ -35,6 +35,7 @@ const FocusTextEl = document.getElementById('whyEl');
 const counterDivs = document.querySelectorAll('.counter');
 const completeFocusEl = document.getElementById('focusTimeDisplay');
 const totalFocusEl = document.getElementById('totalTimeDisplay');
+const returnGameFocusBtn = document.getElementById('returnFocusGameBtn');
 
 if (!timerDisplay || !btnDivEl || focusButtons.length === 0) {
   console.error("One or more key elements not found in the DOM.");
@@ -578,7 +579,7 @@ const games = [
       displayHighScore(score);
       callback(score);
     })
-  },
+  }, 
   {
     name: 'Memory',
     explanation: 'Memory Match is a fun game where you find and match pairs of cards with identical symbols on a 4x4 grid. Flip and match all pairs to win, testing and improving your memory skills!',
@@ -632,14 +633,17 @@ const games = [
       displayHighScore(score);
       callback(score);
     }),
-  },
+  }, 
 ];
 
 // Display the high score
 export const displayHighScore = (gameName) => {
   const highScore = localStorage.getItem(`${gameName}HighScore`) || 0;
-  let highScoreEl = JSON.parse(highScore);
-  return highScoreEl;
+  if (highScore !== null) {
+    return highScore;
+  } else {
+    return 'no highscore yet';
+  }
 }
 
 // Update the high score
@@ -734,28 +738,44 @@ function displayRandomGame() {
   previousGameIndex = randomGameIndex;
 
   gamesContainer.innerHTML = `
-  <div id="instructionDiv">
+    <div id="instructionDiv">
       <h2>${selectedGame.name}</h2>
       <p>${selectedGame.explanation}</p>
+      <button id="skipGameBtn">Skip</button>
       <button id="skipExplainBtn">Play</button>
-  </div>
+    </div>
   `;
+
+  const skipGameBtn = document.getElementById('skipGameBtn');
+  skipGameBtn.addEventListener('click', () => {
+    displayRandomGame();
+  });
+
+  returnGameFocusBtn.addEventListener('click', () => {
+          timerContainer.style.display = 'block';
+          timerDivEl.style.display = 'flex';
+          gamesContainer.style.display = 'none';
+          returnGameFocusBtn.style.display = 'none';
+          resumeTimer();
+  });
 
   const skipExplainBtn = document.getElementById('skipExplainBtn');
   skipExplainBtn.addEventListener('click', () => {
+    returnGameFocusBtn.style.display = 'block';
     gamesContainer.innerHTML = "";
     selectedGame.play((gameFinished) => {
       if (gameFinished) {
+        returnGameFocusBtn.style.display = 'none';
         // Handle game finished logic here
         gamesContainer.innerHTML = `
-        <div id="afterGame">
-          <p id="textEl">The task has finished. Do you want to play another? Or do you want to go back to focus?</p>
-          <div afterGameBtnEl>
-            <button id="playAnotherBtn">Play another</button>
-            <button id="declineAnotherPlayBtn">Return to focus</button>
+          <div id="afterGame">
+            <p id="textEl">The task has finished. Do you want to play another? Or do you want to go back to focus?</p>
+            <div id="afterGameBtnEl">
+              <button id="playAnotherBtn">Play another</button>
+              <button id="declineAnotherPlayBtn">Return to focus</button>
+            </div>
+            <div class="counter">20</div>
           </div>
-          <div class="counter">20</div>
-        </div>
         `;
 
         const counterDivs = document.querySelectorAll('.counter');
@@ -774,7 +794,6 @@ function displayRandomGame() {
           gamesContainer.style.display = 'none';
           resumeTimer();
         });
-        // You can render new things here or perform any other actions
       }
     });
   });

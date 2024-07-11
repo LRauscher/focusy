@@ -435,6 +435,17 @@ header img {
   margin: 13px;
 }
 
+#skipGameBtn {
+  border-radius: 9px;
+  border: none;
+  background-color: var(--secondary-background);
+  color: var(--primary-text);
+  padding: 10px 12px;
+  position: absolute;
+  left: 3%;
+  bottom: 3%;
+}
+
 #skipExplainBtn {
   border-radius: 9px;
   border: none;
@@ -446,7 +457,7 @@ header img {
   bottom: 3%;
 }
 
-#skipExplainBtn:hover {
+#skipExplainBtn:hover, #skipGameBtn:hover {
   opacity: .8;
   cursor: pointer;
 }
@@ -468,4 +479,21 @@ header img {
 #afterGame button:hover {
   cursor: pointer;
   opacity: .8;
+}
+
+#returnFocusGameBtn {
+  display: none;
+  position: absolute;
+  left: 2%;
+  bottom: 2%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 9px;
+  background-color: var(--secondary-background);
+  color: var(--primary-text);
+}
+
+#returnFocusGameBtn:hover {
+  opacity: .8;
+  cursor: pointer;
 }
