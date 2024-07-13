@@ -72,7 +72,8 @@ export function wordle(gamesContainer, gameFinishedCallback) {
 
         if (guess === correctWord) {
             submitButton.disabled = true;
-            updateHighScore('wordle', currentRow + 1);
+            let score = currentRow + 1;
+            updateHighScore('wordle', score);
             displayHighScore('wordle');
             gamesContainer.innerHTML = `<p id="correctGuess">Congratulations! You guessed the right word in ${currentRow + 1} attempts!</p>`;
             gameFinished = true;
@@ -80,12 +81,13 @@ export function wordle(gamesContainer, gameFinishedCallback) {
                 gameFinishedCallback(gameFinished);
             }, 2000);
         } else if (currentRow === 5) {
-            updateHighScore('wordle', currentRow + 1);
-            displayHighScore('wordle');
+            let score = currentRow + 1;
+            updateHighScore('wordle', score);
+            const highscore = displayHighScore('wordle');
             submitButton.disabled = true;
             gamesContainer.innerHTML = `<p id="wrongGuess">Game over! </br>
-             The right word was "${correctWord}" </br>
-             Highscore: ${displayHighScore.toString()}</p>`;
+            The right word was "${correctWord}" </br>
+            Highscore: ${highscore}</p>`;
             gameFinished = true;
             setTimeout(() => {
             gameFinishedCallback(gameFinished);

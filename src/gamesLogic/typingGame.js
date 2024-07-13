@@ -67,10 +67,10 @@ export function speedtestGame(container, callback) {
             clearInterval(intervalId);
             input.disabled = true;
             updateHighScore('Speedtest', score);
-            displayHighScore('Speedtest');
+            const highscore = displayHighScore('Speedtest');
             container.innerHTML = `<p id="endScore">Time's up! You managed ${score} words! 
             ${wrongWords} words were incorrect.</p>
-            <p>${displayHighScore.toString()} is your highscore`;
+            <p>${highscore} is your highscore`;
 
             // Display the score for a few seconds before clearing it
             setTimeout(() => {

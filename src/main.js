@@ -638,7 +638,7 @@ const games = [
 
 // Display the high score
 export const displayHighScore = (gameName) => {
-  const highScore = localStorage.getItem(`${gameName}HighScore`) || 0;
+  const highScore = parseInt(localStorage.getItem(`${gameName}HighScore`) || 0, 10);
   if (highScore !== null) {
     return highScore;
   } else {
