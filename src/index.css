@@ -234,15 +234,15 @@ header img {
 }
 
 #timeInput label {
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 
 #timeInputBtn {
-  padding: 2px;
+  padding: 4px;
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  font-size: 1.1em;
+  font-size: 1.3em;
   background-color: var(--secondary-background);
   color: var(--primary-text);
   border: none;
@@ -256,8 +256,9 @@ header img {
 }
 
 #labelRange {
-  font-size: 2em;
+  font-size: 2.8em;
   font-family: 'Poppins';
+  margin: 16px;
 }
 
 #rangeFlex {
