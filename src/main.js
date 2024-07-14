@@ -638,8 +638,8 @@ const games = [
 
 // Display the high score
 export const displayHighScore = (gameName) => {
-  const highScore = parseInt(localStorage.getItem(`${gameName}HighScore`) || 0, 10);
-  if (highScore !== null) {
+  const highScore = parseInt(localStorage.getItem(`${gameName}HighScore`), 10);
+  if (!isNaN(highScore)) {
     return highScore;
   } else {
     return 'no highscore yet';
@@ -648,7 +648,7 @@ export const displayHighScore = (gameName) => {
 
 // Update the high score
 export const updateHighScore = (gameName, score) => {
-  const highScore = localStorage.getItem(`${gameName}HighScore`) || 0;
+  const highScore = localStorage.getItem(`${gameName}HighScore`, 10) || 0;
   if (score > highScore) {
       localStorage.setItem(`${gameName}HighScore`, score);
   }
