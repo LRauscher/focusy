@@ -234,15 +234,15 @@ header img {
 }
 
 #timeInput label {
-  font-size: 1.4em;
+  font-size: 1.2em;
 }
 
 #timeInputBtn {
-  padding: 4px;
+  padding: 2px;
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  font-size: 1.3em;
+  font-size: 1.1em;
   background-color: var(--secondary-background);
   color: var(--primary-text);
   border: none;
@@ -256,9 +256,8 @@ header img {
 }
 
 #labelRange {
-  font-size: 2.8em;
+  font-size: 2em;
   font-family: 'Poppins';
-  margin: 16px;
 }
 
 #rangeFlex {
@@ -436,17 +435,6 @@ header img {
   margin: 13px;
 }
 
-#skipGameBtn {
-  border-radius: 9px;
-  border: none;
-  background-color: var(--secondary-background);
-  color: var(--primary-text);
-  padding: 10px 12px;
-  position: absolute;
-  left: 3%;
-  bottom: 3%;
-}
-
 #skipExplainBtn {
   border-radius: 9px;
   border: none;
@@ -458,15 +446,14 @@ header img {
   bottom: 3%;
 }
 
-#skipExplainBtn:hover, #skipGameBtn:hover {
+#skipExplainBtn:hover {
   opacity: .8;
   cursor: pointer;
 }
 
 #afterGame {
-  margin: 25px;
+  margin: 40px;
   text-align: center;
-  font-size: 1.1em;
 }
 
 #afterGame button {
@@ -481,21 +468,4 @@ header img {
 #afterGame button:hover {
   cursor: pointer;
   opacity: .8;
-}
-
-#returnFocusGameBtn {
-  display: none;
-  position: absolute;
-  left: 2%;
-  bottom: 2%;
-  padding: 8px 10px;
-  border: none;
-  border-radius: 9px;
-  background-color: var(--secondary-background);
-  color: var(--primary-text);
-}
-
-#returnFocusGameBtn:hover {
-  opacity: .8;
-  cursor: pointer;
 }

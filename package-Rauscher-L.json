@@ -1,0 +1,83 @@
+{
+  "name": "focusy",
+  "productName": "focusy",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "make:windows": "electron-forge make --platform=win32",
+    "make:macos": "electron-forge make --platform=darwin",
+    "make:linux": "electron-forge make --platform=linux",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\"",
+    "zip-macos": "node zip-macos.js"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
+    "archiver": "^5.3.0",
+    "electron": "31.0.2"
+  },
+  "keywords": [],
+  "author": {
+    "name": "LRauscher",
+    "email": "134446069+LRauscher@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "canvas-confetti": "^1.9.3",
+    "chess.js": "^1.0.0-beta.8",
+    "chessboardjs": "^0.0.1",
+    "electron-squirrel-startup": "^1.0.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "./assets/icons/icon"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "iconUrl": "https://path/to/your/icon.ico",
+            "setupIcon": "./assets/icons/windows.ico"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ],
+          "config": {
+            "icon": "./assets/icons/apple.icns"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "options": {
+              "icon": "./assets/icons/linux.png"
+            }
+          }
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {
+            "options": {
+              "icon": "./assets/icons/linux.png"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

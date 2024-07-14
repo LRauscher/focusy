@@ -9,19 +9,22 @@
 
 #number-sequence-game p {
     margin: 10px 0;
+    font-size: 1.3em;
 }
 
 #sequence-input {
     padding: 8px;
     margin-top: 10px;
-    width: 100px;
+    width: 120px;
     text-align: center;
     font-size: 16px;
+    border-radius: 9px;
 }
 
 #submit-sequence {
     padding: 10px 20px;
     margin-top: 10px;
+    margin-left: 6px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -32,9 +35,11 @@
 
 #submit-sequence:hover {
     background-color: #45a049;
+    cursor: pointer;
 }
 
 #sequence-result {
     margin-top: 4px;
     font-weight: bold;
+    font-size: 1.3em;
 }
