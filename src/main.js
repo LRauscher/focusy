@@ -36,6 +36,8 @@ const counterDivs = document.querySelectorAll('.counter');
 const completeFocusEl = document.getElementById('focusTimeDisplay');
 const totalFocusEl = document.getElementById('totalTimeDisplay');
 const returnGameFocusBtn = document.getElementById('returnFocusGameBtn');
+const minimizeBtn = document.getElementById('minimizeButton');
+const mainEl = document.getElementById('main');
 
 if (!timerDisplay || !btnDivEl || focusButtons.length === 0) {
   console.error("One or more key elements not found in the DOM.");
@@ -798,6 +800,19 @@ function displayRandomGame() {
     });
   });
 }
+
+// minimize functionality
+
+minimizeBtn.addEventListener('click', () => {
+  headerEl.style.display = 'none';
+  mainEl.innerHTML = `
+  <div id="mini">
+      <div id="logoDiv">
+          <img src="../public/images/Web Staples Focusy.png">
+      </div>
+      <div id="timerDisplay"></div>
+  `;
+});
 
 window.addEventListener('load', () => {
   loadTotalFocusTime();
