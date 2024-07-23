@@ -503,3 +503,19 @@ header img {
   opacity: .8;
   cursor: pointer;
 }
+
+#mini {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#logoDiv {
+  width: 30%;
+}
+
+#logoDiv img {
+  width: 100%;
+  height: 100%;
+}
