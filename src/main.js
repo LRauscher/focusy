@@ -801,22 +801,6 @@ function displayRandomGame() {
   });
 }
 
-// minimize functionality
-
-minimizeBtn.addEventListener('click', () => {
-  headerEl.style.display = 'none';
-  mainEl.innerHTML = `
-  <div id="mini">
-      <div id="logoDiv">
-          <img src="../public/images/Web Staples Focusy.png">
-      </div>
-      <div id="timerDisplay">00</div>
-    </div>
-  `;
-});
-
-// TODO: when user clicks on app it should go back to its original size
-
 window.addEventListener('load', () => {
   loadTotalFocusTime();
   displayTotalFocusTime();

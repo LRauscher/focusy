@@ -28,7 +28,14 @@ const createWindow = () => {
   // Set up the IPC listener in the createWindow function
   ipcMain.on('minimize-window', () => {
     if (mainWindow) {
-      mainWindow.setSize(500, 150); // Set the new fixed size
+      mainWindow.setSize(400, 200); // Adjust the window size as needed
+    }
+  });
+
+  ipcMain.on('restore-window', () => {
+    if (mainWindow) {
+      mainWindow.setSize(500, 300); // Restore the window to its original size
+      mainWindow.webContents.send('restore-content');
     }
   });
 };
