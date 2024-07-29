@@ -3,18 +3,14 @@
 const minimizeBtn = document.getElementById('minimizeButton');
 const headerEl = document.getElementById('header');
 const mainEl = document.getElementById('main');
+const miniEl = document.getElementById('miniMain');
 
 minimizeBtn.addEventListener('click', () => {
   console.log('Minimize button clicked');
+  originalContent = mainEl.innerHTML;
   headerEl.style.display = 'none';
-  mainEl.innerHTML = `
-    <div id="mini">
-      <div id="logoDiv">
-        <img src="../public/images/Web Staples Focusy.png" alt="Logo" >
-      </div>
-      <div id="timerDisplay"></div>
-    </div>
-  `;
+  mainEl.style.display = 'none';
+  miniEl.style.display = 'block';
 
   window.electron.ipcRenderer.send('minimize-window');
 
@@ -26,6 +22,7 @@ minimizeBtn.addEventListener('click', () => {
 
 window.electron.ipcRenderer.on('restore-content', () => {
   console.log('Restoring content...');
-  headerEl.style.display = 'block';
-  mainEl.innerHTML = ''; // Restore your original content here
+  miniEl.style.display = 'none';
+  headerEl.style.display = 'flex';
+  mainEl.style.display = 'block';
 });
