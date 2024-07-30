@@ -28,7 +28,7 @@ const createWindow = () => {
   // Set up the IPC listener in the createWindow function
   ipcMain.on('minimize-window', () => {
     if (mainWindow) {
-      mainWindow.setSize(400, 300); // Adjust the window size as needed
+      mainWindow.setSize(500, 100); // Adjust the window size as needed
     }
   });
 

@@ -801,6 +801,11 @@ function displayRandomGame() {
   });
 }
 
+// mini Timer
+
+const miniTimer = document.getElementById('miniTimerDisplay');
+
+
 window.addEventListener('load', () => {
   loadTotalFocusTime();
   displayTotalFocusTime();
