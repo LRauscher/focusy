@@ -27,7 +27,7 @@ body {
   overflow: hidden; /* Prevents scrolling */
 }
 
-.window {
+#window {
   border-radius: 15px;
   overflow: hidden; /* Ensures rounded corners are properly displayed */
   background-color: var(--primary-background);

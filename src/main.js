@@ -38,6 +38,9 @@ const totalFocusEl = document.getElementById('totalTimeDisplay');
 const returnGameFocusBtn = document.getElementById('returnFocusGameBtn');
 const minimizeBtn = document.getElementById('minimizeButton');
 const mainEl = document.getElementById('main');
+const miniMain = document.getElementById('miniMain');
+const windowEl = document.getElementById('window');
+const miniTimerDisplay = document.getElementById('miniTimerDisplay');
 
 if (!timerDisplay || !btnDivEl || focusButtons.length === 0) {
   console.error("One or more key elements not found in the DOM.");
@@ -54,6 +57,30 @@ const quitText = 'i want to give up!';
 let progressWidth = 0;
 let totalFocusTime = 0;
 let allTimeFocus = 0;
+let interuption = false;
+let minimized = false;
+
+// mini timer
+
+minimizeBtn.addEventListener('click', (seconds) => {
+  minimized = true;
+  miniCountdown(seconds);
+});
+
+function interuptionBackground() {
+  if (interuption) {
+    windowEl.style.backgroundColor = '#fff89470';
+  } else {
+    windowEl.style.backgroundColor = '';
+  }
+}
+
+// function for mini countdown
+
+function miniCountdown(seconds) {
+  let miniSecs = seconds;
+  miniTimerDisplay.textContent = miniSecs;
+}
 
 // Function to make the 20-second timer
 function counter(counterDivs) {
@@ -83,6 +110,8 @@ function counter(counterDivs) {
       timerContainer.style.display = 'block';
       timerDivEl.style.display = 'flex';
       gamesContainer.style.display = 'none';
+      interuption = false;
+      interuptionBackground(interuption);
       resumeTimer();
       counterDivs.forEach(counterDiv => {
         counterDiv.textContent = 20;
@@ -695,6 +724,8 @@ function generateRandomTimes(duration) {
 function triggerRandomEvent() {
   console.log('Random event triggered');
   showInteruption(); // Call your function here
+  interuption = true;
+  interuptionBackground(interuption);
 }
 
 function showInteruption() {
@@ -800,11 +831,6 @@ function displayRandomGame() {
     });
   });
 }
-
-// mini Timer
-
-const miniTimer = document.getElementById('miniTimerDisplay');
-
 
 window.addEventListener('load', () => {
   loadTotalFocusTime();
