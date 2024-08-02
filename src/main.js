@@ -68,7 +68,7 @@ minimizeBtn.addEventListener('click', (seconds) => {
 });
 
 function interuptionBackground() {
-  if (interuption) {
+  if (interuption && minimized) {
     windowEl.style.backgroundColor = '#fff89470';
   } else {
     windowEl.style.backgroundColor = '';
