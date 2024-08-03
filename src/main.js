@@ -67,6 +67,11 @@ minimizeBtn.addEventListener('click', (seconds) => {
   miniCountdown(seconds);
 });
 
+miniMain.addEventListener('click', () => {
+  minimized = false;
+  interuptionBackground();
+});
+
 function interuptionBackground() {
   if (interuption && minimized) {
     windowEl.style.backgroundColor = '#fff89470';
@@ -78,8 +83,8 @@ function interuptionBackground() {
 // function for mini countdown
 
 function miniCountdown(seconds) {
-  let miniSecs = seconds;
-  miniTimerDisplay.textContent = miniSecs;
+  let formattedTime = formatTime(seconds); // Use formatTime to format the seconds
+  miniTimerDisplay.textContent = formattedTime; // Set the formatted time
 }
 
 // Function to make the 20-second timer
