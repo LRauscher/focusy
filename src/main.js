@@ -64,7 +64,7 @@ let minimized = false;
 
 minimizeBtn.addEventListener('click', (seconds) => {
   minimized = true;
-  miniCountdown(seconds);
+  miniCountdown(timeRemaining);
 });
 
 miniMain.addEventListener('click', () => {
@@ -82,9 +82,13 @@ function interuptionBackground() {
 
 // function for mini countdown
 
-function miniCountdown(seconds) {
-  let formattedTime = formatTime(seconds); // Use formatTime to format the seconds
-  miniTimerDisplay.textContent = formattedTime; // Set the formatted time
+function miniCountdown(timeRemaining) {
+  let formattedTime = timeRemaining % 60;
+  miniTimerDisplay.textContent = formattedTime;
+  setInterval(() => {
+    formattedTime--;
+    miniTimerDisplay.textContent = formattedTime; // Set the formatted time
+  }, 1000);
 }
 
 // Function to make the 20-second timer

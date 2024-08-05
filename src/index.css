@@ -468,9 +468,13 @@ header img {
 }
 
 #afterGame {
-  margin: 25px;
+  margin: 40px;
   text-align: center;
-  font-size: 1.1em;
+}
+
+#aftergame h2 {
+  font-size: 2em;
+  width: 80%;
 }
 
 #afterGame button {
