@@ -87,7 +87,7 @@ export function wordle(gamesContainer, gameFinishedCallback) {
             submitButton.disabled = true;
             gamesContainer.innerHTML = `<p id="wrongGuess">Game over! </br>
             The right word was "${correctWord}" </br>
-            Highscore: ${highscore}</p>`;
+            Highscore: ${highscore} attempts</p>`;
             gameFinished = true;
             setTimeout(() => {
             gameFinishedCallback(gameFinished);

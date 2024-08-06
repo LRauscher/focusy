@@ -12,7 +12,7 @@ export function speedtestGame(container, callback) {
 
     const wordDisplay = document.createElement('h2');
     const words = [
-        'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'I',
+        'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'i',
         'it', 'for', 'not', 'on', 'with', 'he', 'as', 'you', 'do', 'at',
         'this', 'but', 'his', 'by', 'from', 'they', 'we', 'say', 'her', 'she',
         'or', 'an', 'will', 'my', 'one', 'all', 'would', 'there', 'their', 'what',
@@ -69,13 +69,13 @@ export function speedtestGame(container, callback) {
             updateHighScore('Speedtest', score);
             const highscore = displayHighScore('Speedtest');
             container.innerHTML = `<p id="endScore">Time's up! You managed ${score} words! 
-            ${wrongWords} words were incorrect.</p>
-            <p>${highscore} is your highscore`;
+            ${wrongWords} words were incorrect. </ br>
+            Highscore: ${highscore}</p>`;
 
             // Display the score for a few seconds before clearing it
             setTimeout(() => {
                 callback(true); // Indicate the game is finished
-            }, 3000); // Display the score for 3 seconds
+            }, 5000); // Display the score for 3 seconds
         }
     }, 1000);
 
