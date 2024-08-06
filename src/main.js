@@ -82,12 +82,26 @@ function interuptionBackground() {
 
 // function for mini countdown
 
+let miniInterval;
+
 function miniCountdown(timeRemaining) {
-  let formattedTime = timeRemaining % 60;
-  miniTimerDisplay.textContent = formattedTime;
-  setInterval(() => {
-    formattedTime--;
-    miniTimerDisplay.textContent = formattedTime; // Set the formatted time
+  function updateMiniDisplay(time) {
+    const minutes = Math.floor(time / 60) + 1;
+    return String(minutes);
+  }
+
+  miniTimerDisplay.textContent = updateMiniDisplay(timeRemaining);
+
+  miniInterval = setInterval(() => {
+    timeRemaining--;
+    miniTimerDisplay.textContent = updateMiniDisplay(timeRemaining);
+
+    if (timeRemaining <= 10) {
+      clearInterval(miniInterval);
+      window.electron.ipcRenderer.send('restore-window');
+      minimized = false;
+      interuptionBackground();
+    }
   }, 1000);
 }
 
@@ -163,6 +177,7 @@ function startTimer(durationValue) {
     
     if (timeRemaining <= 0) {
       clearInterval(timerInterval); // Stop the timer when it reaches zero
+      clearInterval(miniInterval);
             confetti({
         particleCount: 100,
         spread: 70,
@@ -254,6 +269,7 @@ function stopTimer() {
   console.log("Stopping the timer");
   if (timerInterval) {
     clearInterval(timerInterval);
+    clearInterval(miniInterval);
     timerInterval = null;
   }
 }
@@ -263,7 +279,9 @@ function pauseTimer () {
   console.log('Pausing timer');
   if (timerInterval) {
     clearInterval(timerInterval);
+    clearInterval(miniInterval);
     timerInterval = null;
+    miniInterval = null;
   }
 }
 

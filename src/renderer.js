@@ -10,7 +10,7 @@ minimizeBtn.addEventListener('click', () => {
   originalContent = mainEl.innerHTML;
   headerEl.style.display = 'none';
   mainEl.style.display = 'none';
-  miniEl.style.display = 'block';
+  miniEl.style.display = 'flex';
 
   window.electron.ipcRenderer.send('minimize-window');
 

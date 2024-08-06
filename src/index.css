@@ -39,7 +39,7 @@ body {
   -webkit-app-region: drag; /* Makes this area draggable */
 }
 
-header {
+header:not(#miniHeader) {
   background-color: var(--primary-background);
   margin: 0;
   padding: 25px;
@@ -512,6 +512,7 @@ header img {
   display: none;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 #mini {
@@ -520,6 +521,22 @@ header img {
   align-items: center;
   justify-content: space-between;
   margin: 10px;
+}
+
+#miniHeader {
+  margin: 0;
+  width: 100%;
+  padding: 3px;
+}
+
+#drag {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: var(--accent-primary);
+  position: absolute;
+  top: 3%;
+  right: 2%;
 }
 
 #logoDiv {
@@ -534,8 +551,10 @@ header img {
 #miniTimerDisplay {
   background-color: var(--primary-background);
   border-radius: 50%;
-  padding: 8px;
+  padding: 2px;
   font-size: 2.5em;
   margin-right: 10px;
   font-family: 'Poppins';
+  min-width: 60px;
+  text-align: center;
 }

@@ -10,7 +10,7 @@
 }
 
 #speedtestGame h2 {
-    margin: 20px 0;
+    margin: 15px 0;
     font-size: 24px;
     color: var(--primary-heading);
 }
@@ -19,7 +19,7 @@
     width: 80%;
     padding: 10px;
     font-size: 18px;
-    margin: 6px 0;
+    margin: 4px 0;
     border: 1px solid #007BFF;
     border-radius: 5px;
 }
