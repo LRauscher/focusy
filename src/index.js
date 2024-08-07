@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const { autoUpdater } = require('electron-updater');
 
@@ -26,6 +26,10 @@ const createWindow = () => {
   mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
+  mainWindow.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
+
   // Set up the IPC listener in the createWindow function
   ipcMain.on('minimize-window', () => {
     if (mainWindow) {
@@ -41,8 +45,6 @@ const createWindow = () => {
       mainWindow.webContents.send('restore-content');
     }
   });
-
-  autoUpdater.checkForUpdates();
 };
 
 // Update logic
@@ -55,17 +57,19 @@ autoUpdater.on('update-downloaded', () => {
 });
 
 autoUpdater.on('error', (error) => {
-  alert('Update error:', error);
+  dialog.showErrorBox('Update error', error == null ? "unknown" : (error.stack || error).toString());
 });
 
-app.whenReady().then(() => {
-  createWindow();
+ipcMain.on('restart-app', () => {
+  autoUpdater.quitAndInstall();
+});
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
+app.whenReady().then(createWindow);
+
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });
 
 app.on('window-all-closed', () => {

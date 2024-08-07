@@ -2,7 +2,7 @@
   "name": "focusy",
   "productName": "focusy",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Focusy is a productivity app to help  you focus on your tasks.",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -25,7 +25,8 @@
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
     "archiver": "^5.3.0",
-    "electron": "31.0.2"
+    "electron": "31.0.2",
+    "electron-builder": "^24.13.3"
   },
   "keywords": [],
   "author": {
@@ -35,8 +36,6 @@
   "license": "MIT",
   "dependencies": {
     "canvas-confetti": "^1.9.3",
-    "chess.js": "^1.0.0-beta.8",
-    "chessboardjs": "^0.0.1",
     "electron-squirrel-startup": "^1.0.1",
     "electron-updater": "^6.2.1"
   },
