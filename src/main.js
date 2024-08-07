@@ -64,7 +64,9 @@ let minimized = false;
 
 // mini timer
 
-minimizeBtn.addEventListener('click', (seconds) => {
+minimizeBtn.setAttribute('disabled', 'true');
+
+minimizeBtn.addEventListener('click', () => {
   minimized = true;
   miniCountdown(timeRemaining);
 });
@@ -345,7 +347,8 @@ focusButtons.forEach((button, index) => {
       durationInput.style.display = 'flex';
       headerEl.style.maxHeight = '15vh';
     
-      durationInputBtn.addEventListener('click', () => { // Entferne den Parameter durationValue hier
+      durationInputBtn.addEventListener('click', () => {
+        minimizeBtn.removeAttribute('disabled');
         durationInput.style.display = 'none';
         timerContainer.style.display = 'block'; // Show the timer
         timerDivEl.style.display = 'flex';
@@ -747,7 +750,7 @@ function getEventCount(duration) {
   } else if (duration >= 600) { // 10 to 15 minutes
     return 2;
   } else { // Less than 10 minutes
-    return 100;
+    return 1;
   }
 }
 
