@@ -317,6 +317,7 @@ header img {
   background-color: var(--secondary-background);
   color: var(--primary-text);
   text-align: center;
+  width: auto;
 }
 
 #quitInput::placeholder {
