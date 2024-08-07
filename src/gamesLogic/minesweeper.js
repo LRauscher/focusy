@@ -78,9 +78,11 @@ export function minesweeperGame(container, callback) {
 
     if (board[row][col].mine) {
       cell.textContent = '💣';
-      gameOver = true;
-      callback(gameOver);
       revealAllMines();
+      setTimeout(() => {
+        gameOver = true;
+        callback(gameOver);
+      }, 3000);
     }
 
     if (board[row][col].count > 0) {

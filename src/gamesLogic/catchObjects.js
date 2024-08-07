@@ -209,11 +209,17 @@ export function catchObjects(gamesContainer, gameFinishedCallback) {
         ctx.fillStyle = result === 'win' ? 'green' : 'red';
         ctx.font = '30px Inter';
         ctx.textAlign = 'center';
-        ctx.fillText(result === 'win' ? 'You Win!' : 'Game Over', canvas.width / 2, canvas.height / 2);
+        ctx.fillText(result === 'win' ? 'You Win!' : 'Game Over', canvas.width / 2, canvas.height / 2 - 20);
+
+        // Show the score
+        ctx.font = '20px Inter';
+        ctx.fillText(`Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
 
         // Call the callback function
         if (gameFinishedCallback) {
-            gameFinishedCallback(result);
+            setTimeout(() => {
+                gameFinishedCallback(result);
+            }, 3000);
         }
     }
 

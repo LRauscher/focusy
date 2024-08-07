@@ -5,7 +5,9 @@ import { wordle } from './gamesLogic/wordle.js';
 import { catchObjects } from './gamesLogic/catchObjects.js';
 import { speedtestGame } from './gamesLogic/typingGame.js';
 import { minesweeperGame } from './gamesLogic/minesweeper.js';
-import { game2048 } from './gamesLogic/2048.js';
+import { snakeGame } from './gamesLogic/snake.js';
+import { hangmanGame } from './gamesLogic/hangman.js';
+import { ticTacToe } from './gamesLogic/ticTacToe.js';
 import { numberSequence } from './gamesLogic/numberPattern.js';
 
 // Get references to HTML elements
@@ -90,11 +92,11 @@ function miniCountdown(timeRemaining) {
     return String(minutes);
   }
 
-  miniTimerDisplay.textContent = updateMiniDisplay(timeRemaining);
+  miniTimerDisplay.textContent = `${updateMiniDisplay(timeRemaining)}'`;
 
   miniInterval = setInterval(() => {
     timeRemaining--;
-    miniTimerDisplay.textContent = updateMiniDisplay(timeRemaining);
+    miniTimerDisplay.textContent = `${updateMiniDisplay(timeRemaining)}'`;
 
     if (timeRemaining <= 10) {
       clearInterval(miniInterval);
@@ -665,15 +667,17 @@ const games = [
       callback(score);
     })
   },
+  /*
   {
-    name: '2048',
-    explanation: 'Combine tiles with the same number to merge them into one tile with the sum of the two numbers. Keep combining tiles to reach 2048!',
-    play: (callback) => game2048(gamesContainer, (score) => {
-      updateHighScore('2048', score);
+    name: 'Tic-Tac-Toe',
+    explanation: 'Play a classic game of Tic-Tac-Toe against an AI opponent. Try to get three in a row before your opponent does!',
+    play: (callback) => ticTacToe(gamesContainer, (score) => {
+      updateHighScore('Tic-Tac-Toe', score);
       displayHighScore(score);
       callback(score);
     })
   },
+  */
   {
     name: 'Minesweeper',
     explanation: 'Reveal all the cells that do not contain mines without triggering any mines. Use the numbers to deduce the locations of the mines.',
@@ -683,6 +687,26 @@ const games = [
       callback(score);
     })
   },
+  /*
+  {
+    name: 'Snake Game',
+    explanation: 'Control the snake to eat the food and grow longer. Avoid running into the walls or the snake\'s own body.',
+    play: (callback) => snakeGame(gamesContainer, (score) => {
+      updateHighScore('Snake Game', score);
+      displayHighScore(score);
+      callback(score);
+    })
+  },
+  {
+    name: 'Hangman',
+    explanation: 'Guess the letters in the hidden word. You have a limited number of incorrect guesses before the game is over.',
+    play: (callback) => hangmanGame(gamesContainer, (score) => {
+      updateHighScore('Hangman', score);
+      displayHighScore(score);
+      callback(score);
+    })
+  },
+  */
   {
     name: 'Number Sequence',
     explanation: 'Guess the next number in the sequence correctly to win.',

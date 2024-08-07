@@ -29,12 +29,14 @@ const createWindow = () => {
   ipcMain.on('minimize-window', () => {
     if (mainWindow) {
       mainWindow.setSize(300, 100); // Adjust the window size as needed
+      mainWindow.setResizable(false);
     }
   });
 
   ipcMain.on('restore-window', () => {
     if (mainWindow) {
       mainWindow.setSize(500, 300); // Restore the window to its original size
+      mainWindow.setResizable(true);
       mainWindow.webContents.send('restore-content');
     }
   });

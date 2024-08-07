@@ -2,25 +2,14 @@ import { updateHighScore, displayHighScore } from "../main.js";
 
 export function numberSequence(container, callback) {
     const sequences = [
-        { start: 1, step: 2 }, { start: 3, step: 3 }, { start: 10, step: -2 }, { start: 5, step: 5 },
-        { start: 2, step: 4 }, { start: 100, step: -1 }, { start: -1, step: -3 }, { start: 0, step: 0 },
-        { start: 1, step: 0 }, { start: 10, step: 1 }, { start: -5, step: -5 }, { start: 4, step: 2 },
-        { start: 7, step: -3 }, { start: 2, step: 0 }, { start: -3, step: 1 }, { start: 1, step: 1 },
-        { start: 0, step: 2 }, { start: 5, step: -1 }, { start: 20, step: 5 }, { start: 6, step: -2 },
-        { start: 3, step: 4 }, { start: -2, step: -2 }, { start: 8, step: 3 }, { start: 1, step: -1 },
-        { start: 2, step: 3 }, { start: 15, step: 0 }, { start: 3, step: -3 }, { start: 12, step: 2 },
-        { start: 50, step: -5 }, { start: 0, step: -1 }, { start: 1, step: 4 }, { start: 6, step: -1 },
-        { start: 8, step: 2 }, { start: -3, step: 3 }, { start: 100, step: 10 }, { start: 20, step: -3 },
-        { start: 0, step: 1 }, { start: 1, step: 0.5 }, { start: 5, step: -2 }, { start: 2, step: 1 },
-        { start: 7, step: -4 }, { start: 4, step: 0 }, { start: 1, step: -2 }, { start: 6, step: 3 },
-        { start: 0, step: 0.1 }, { start: 9, step: -3 }, { start: 15, step: -5 }, { start: 3, step: -1 },
-        { start: 4, step: 5 }, { start: 8, step: -1 }, { start: 12, step: 3 }, { start: 7, step: 2 },
-        { start: 1, step: -0.5 }, { start: 10, step: 0.5 }, { start: 6, step: 4 }, { start: 2, step: -0.1 },
-        { start: 5, step: 1 }, { start: 8, step: -0.5 }, { start: 3, step: 2 }, { start: 4, step: -0.5 },
-        { start: 1, step: 0.1 }, { start: 2, step: 0.2 }, { start: 10, step: -0.2 }, { start: 6, step: 0.5 },
-        { start: 7, step: 0 }, { start: 3, step: -0.5 }, { start: 5, step: 0.1 }, { start: 4, step: 0.2 },
-        { start: 9, step: 1 }, { start: 1, step: -0.2 }, { start: 2, step: -0.5 }, { start: 3, step: 1 },
-        { start: 4, step: -1 }, { start: 7, step: -2 }, { start: 5, step: -0.5 },
+        { start: 1, step1: 2, step2: 3 }, { start: 3, step1: 3, step2: 2 }, 
+        { start: 10, step1: -2, step2: 2 }, { start: 5, step1: 5, step2: -3 },
+        { start: 2, step1: 4, step2: -1 }, { start: 100, step1: -1, step2: 1 }, 
+        { start: -1, step1: -3, step2: 3 }, { start: 0, step1: 0, step2: 1 },
+        { start: 1, step1: 0, step2: 1 }, { start: 10, step1: 1, step2: -1 },
+        { start: -5, step1: -5, step2: 5 }, { start: 4, step1: 2, step2: -2 },
+        { start: 7, step1: -3, step2: 1 }, { start: 2, step1: 0, step2: 2 },
+        // More sequences can be added here
     ];
 
     let currentSequenceIndex = 0;
@@ -29,12 +18,18 @@ export function numberSequence(container, callback) {
     function generateSequence() {
         const sequence = sequences[currentSequenceIndex];
         const start = sequence.start;
-        const step = sequence.step;
+        const step1 = sequence.step1;
+        const step2 = sequence.step2;
         const length = 5;
         let currentSequence = [];
-
+        
+        // Generate the sequence with two steps
         for (let i = 0; i < length; i++) {
-            currentSequence.push(start + i * step);
+            if (i % 2 === 0) {
+                currentSequence.push(start + Math.floor(i / 2) * step1);
+            } else {
+                currentSequence.push(start + Math.floor(i / 2) * step2);
+            }
         }
 
         container.innerHTML = "";
@@ -60,7 +55,8 @@ export function numberSequence(container, callback) {
 
         submitButton.addEventListener("click", () => {
             const userAnswer = parseFloat(input.value);
-            const correctAnswer = start + length * step;
+            // Calculate the correct answer based on two steps
+            const correctAnswer = start + Math.floor(length / 2) * step1 + Math.floor(length / 2) * step2;
 
             if (userAnswer === correctAnswer) {
                 result.innerHTML = "Correct!";

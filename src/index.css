@@ -69,15 +69,18 @@ header img {
 .closeBtn, .minimizeBtn {
   background-color: var(--secondary-background);
   color: var(--primary-text);
-  font-size: 1.6em;
+  font-size: 1.8em;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  padding: 6px;
+  width: 43px;
+  height: 43px;
+  padding: 0;
   margin-left: 4px;
   cursor: pointer;
   -webkit-app-region: no-drag; /* Prevents buttons from being draggable */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .start-buttons {
@@ -107,6 +110,29 @@ header img {
 .start-buttons p {
   font-size: 1.2em;
   margin: 8px;
+}
+
+#focus-div {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#focus-div p {
+  background-color: var(--secondary-background);
+  color: var(--primary-text);
+  padding: 10px;
+  border-radius: 9px;
+}
+
+#focus-div p:hover {
+  opacity: .8;
+}
+
+#focus-div i {
+  margin-right: 4px;
 }
 
 #timerContainer {
@@ -438,6 +464,12 @@ header img {
 
 #instructionDiv {
   margin: 13px;
+  text-align: left;
+  font-size: 1em;
+}
+
+#instructionDiv h2 {
+  margin: 2px;
 }
 
 #skipGameBtn {

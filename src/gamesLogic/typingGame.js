@@ -56,7 +56,6 @@ export function speedtestGame(container, callback) {
     gameDiv.appendChild(wordDisplay);
     gameDiv.appendChild(input);
     gameDiv.appendChild(timerDisplay);
-    gameDiv.appendChild(scoreDisplay);
     container.appendChild(gameDiv);
 
     const intervalId = setInterval(() => {
@@ -103,7 +102,6 @@ export function speedtestGame(container, callback) {
             } else {
                 wrongWords += 1;
             }
-            scoreDisplay.textContent = `Score: ${score}`;
             input.value = '';
             randomWord = words[Math.floor(Math.random() * words.length)];
             wordDisplay.textContent = randomWord;
