@@ -26,3 +26,14 @@ window.electron.ipcRenderer.on('restore-content', () => {
   headerEl.style.display = 'flex';
   mainEl.style.display = 'block';
 });
+
+ipcRenderer.on('update-available', () => {
+  // Notify user that an update is available
+  alert('Update available. Downloading...');
+});
+
+ipcRenderer.on('update-downloaded', () => {
+  // Notify user that the update is downloaded
+  alert('Update downloaded. Restarting app...');
+  autoUpdater.quitAndInstall(); // This will restart the app and apply the update
+});

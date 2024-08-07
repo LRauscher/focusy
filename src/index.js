@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const { autoUpdater } = require('electron-updater');
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -40,7 +41,22 @@ const createWindow = () => {
       mainWindow.webContents.send('restore-content');
     }
   });
+
+  autoUpdater.checkForUpdates();
 };
+
+// Update logic
+autoUpdater.on('update-available', () => {
+  mainWindow.webContents.send('update-available');
+});
+
+autoUpdater.on('update-downloaded', () => {
+  mainWindow.webContents.send('update-downloaded');
+});
+
+autoUpdater.on('error', (error) => {
+  alert('Update error:', error);
+});
 
 app.whenReady().then(() => {
   createWindow();
