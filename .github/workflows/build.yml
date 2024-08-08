@@ -61,17 +61,17 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub Secrets for token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}  # Using ref_name for tag
+          release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
 
       - name: Upload Linux Release Assets
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub Secrets for token
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: out/make/**/*.deb
@@ -81,7 +81,7 @@ jobs:
       - name: Upload macOS Release Assets
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub Secrets for token
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: out/make/**/*.dmg
@@ -91,7 +91,7 @@ jobs:
       - name: Upload macOS Zip Release Assets
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub Secrets for token
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: out/make/zip/**/*.zip
