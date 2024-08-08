@@ -2,8 +2,8 @@ name: Electron Build and Release
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'v*'
   pull_request:
     branches:
       - master
@@ -56,3 +56,44 @@ jobs:
           path: |
             out/make/**/*.dmg
             out/make/zip/**/*.zip
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: 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
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Linux Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: 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
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: out/make/**/*.deb
+          asset_name: electron-app-linux.deb
+          asset_content_type: application/x-debian-package
+
+      - name: Upload macOS Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: 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
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: out/make/**/*.dmg
+          asset_name: electron-app-macos.dmg
+          asset_content_type: application/x-apple-diskimage
+
+      - name: Upload macOS Zip Release Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: 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
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: out/make/zip/**/*.zip
+          asset_name: electron-app-macos.zip
+          asset_content_type: application/zip
