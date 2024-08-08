@@ -1,6 +1,5 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
-const { autoUpdater } = require('electron-updater');
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -26,10 +25,6 @@ const createWindow = () => {
   mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
-  mainWindow.once('ready-to-show', () => {
-    autoUpdater.checkForUpdatesAndNotify();
-  });
-
   // Set up the IPC listener in the createWindow function
   ipcMain.on('minimize-window', () => {
     if (mainWindow) {
@@ -46,23 +41,6 @@ const createWindow = () => {
     }
   });
 };
-
-// Update logic
-autoUpdater.on('update-available', () => {
-  mainWindow.webContents.send('update-available');
-});
-
-autoUpdater.on('update-downloaded', () => {
-  mainWindow.webContents.send('update-downloaded');
-});
-
-autoUpdater.on('error', (error) => {
-  dialog.showErrorBox('Update error', error == null ? "unknown" : (error.stack || error).toString());
-});
-
-ipcMain.on('restart-app', () => {
-  autoUpdater.quitAndInstall();
-});
 
 app.whenReady().then(createWindow);
 

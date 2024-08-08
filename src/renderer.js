@@ -23,18 +23,3 @@ window.electron.ipcRenderer.on('restore-content', () => {
   headerEl.style.display = 'flex';
   mainEl.style.display = 'block';
 });
-
-window.electron.ipcRenderer.on('update-available', () => {
-  alert('Update available. Downloading...');
-});
-
-window.electron.ipcRenderer.on('update-downloaded', () => {
-  const response = confirm('Update downloaded. Restart now?');
-  if (response) {
-    window.electron.ipcRenderer.send('restart-app');
-  }
-});
-
-window.electron.ipcRenderer.on('update-error', (event, error) => {
-  alert('Update error: ' + error);
-});

@@ -36,8 +36,7 @@
   "license": "MIT",
   "dependencies": {
     "canvas-confetti": "^1.9.3",
-    "electron-squirrel-startup": "^1.0.1",
-    "electron-updater": "^6.2.1"
+    "electron-squirrel-startup": "^1.0.1"
   },
   "config": {
     "forge": {
