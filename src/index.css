@@ -467,10 +467,15 @@ header img {
   margin: 13px;
   text-align: left;
   font-size: 1em;
+  font-family: 'Inter';
 }
 
-#instructionDiv h2 {
+#gameName {
   margin: 2px;
+}
+
+#explainText {
+  font-size: 1em;
 }
 
 #skipGameBtn {
@@ -501,7 +506,7 @@ header img {
 }
 
 #afterGame {
-  margin: 40px;
+  margin: 30px;
   text-align: center;
 }
 

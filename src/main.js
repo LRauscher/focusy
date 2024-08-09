@@ -88,23 +88,38 @@ function interuptionBackground() {
 
 let miniInterval;
 
+function updateMiniDisplay(time) {
+  const minutes = Math.floor(time / 60) + 1;
+  return String(minutes);
+}
+
 function miniCountdown(timeRemaining) {
-  function updateMiniDisplay(time) {
-    const minutes = Math.floor(time / 60) + 1;
-    return String(minutes);
+  // Clear any existing interval to prevent multiple timers running simultaneously
+  if (miniInterval) {
+    clearInterval(miniInterval);
   }
 
   miniTimerDisplay.textContent = `${updateMiniDisplay(timeRemaining)}'`;
 
   miniInterval = setInterval(() => {
     timeRemaining--;
-    miniTimerDisplay.textContent = `${updateMiniDisplay(timeRemaining)}'`;
 
-    if (timeRemaining <= 10) {
+    // Update display only if the time has changed to avoid unnecessary DOM updates
+    const newDisplay = `${updateMiniDisplay(timeRemaining)}'`;
+    if (miniTimerDisplay.textContent !== newDisplay) {
+      miniTimerDisplay.textContent = newDisplay;
+    }
+
+    if (timeRemaining <= 0) {
       clearInterval(miniInterval);
+      miniTimerDisplay.textContent = '0';
+      minimizeBtn.setAttribute('disabled', 'true');
+      // Add any actions you want to perform when the timer finishes
+    } else if (timeRemaining <= 10) {
       window.electron.ipcRenderer.send('restore-window');
       minimized = false;
       interuptionBackground();
+      minimizeBtn.setAttribute('disabled', 'true');
     }
   }, 1000);
 }
@@ -416,6 +431,7 @@ function getQuitValue() {
 // take a break
 breakBtn.addEventListener('click', () => {
   console.log('taking break...');
+  minimizeBtn.setAttribute('disabled', true);
   pauseTimer()
   breakTimer()
 }
@@ -487,6 +503,7 @@ function breakTimer() {
       breakDivEl.style.display = 'none';
       timerDivEl.style.display = 'flex';
       timerContainer.style.display = 'block';
+      minimizeBtn.removeAttribute('disabled');
 
       // Resume the main timer after the break
       resumeTimer();
@@ -507,7 +524,9 @@ function activateLights(interval, container) {
   const lights = container.querySelectorAll('.light');
 
   // Clear any existing interval
-  if (lightInterval) clearInterval(lightInterval);
+  if (lightInterval) {
+    clearInterval(lightInterval);
+  }
   lights.forEach(light => light.classList.remove('on'));
 
   // Function to turn on the next light
@@ -548,6 +567,7 @@ loseFocusBtn.addEventListener('click', () => {
   headerEl.style.maxHeight = '15vh';
   timerContainer.style.display = 'none';
   timerDivEl.style.display = 'none';
+  minimizeBtn.setAttribute('disabled', 'true');
   activateLights(500, lightEl);
   showQuestions();
 });
@@ -622,6 +642,7 @@ function showQuestions() {
         loseFocus.style.display = 'none';
         timerContainer.style.display = 'block';
         timerDivEl.style.display = 'flex';
+        minimizeBtn.removeAttribute('disabled');
         resumeTimer();
       }, 18000);
     }
@@ -699,7 +720,7 @@ const games = [
       displayHighScore(score);
       callback(score);
     })
-  },
+  }, */
   {
     name: 'Hangman',
     explanation: 'Guess the letters in the hidden word. You have a limited number of incorrect guesses before the game is over.',
@@ -709,7 +730,6 @@ const games = [
       callback(score);
     })
   },
-  */
   {
     name: 'Number Sequence',
     explanation: 'Guess the next number in the sequence correctly to win.',
@@ -787,6 +807,8 @@ function showInteruption() {
   timerContainer.style.display = 'none';
   timerDivEl.style.display = 'none';
   gamesContainer.style.display = 'block';
+  minimizeBtn.setAttribute('disabled', 'true');
+  gamesContainer.id = 'gamesContainer';
 
   gamesContainer.innerHTML = `
     <div id="gameBreak">
@@ -824,14 +846,24 @@ function displayRandomGame() {
   const selectedGame = games[randomGameIndex];
   previousGameIndex = randomGameIndex;
 
+  gamesContainer.id = 'gamesContainer';
+
   gamesContainer.innerHTML = `
     <div id="instructionDiv">
-      <h2>${selectedGame.name}</h2>
-      <p>${selectedGame.explanation}</p>
+      <h2 id="gameName">${selectedGame.name}</h2>
+      <p id="explainText">${selectedGame.explanation}</p>
       <button id="skipGameBtn">Skip</button>
       <button id="skipExplainBtn">Play</button>
     </div>
   `;
+
+  const instructionDiv = document.getElementById('instructionDiv');
+  const gameName = document.getElementById('gameName');
+  const explainText = document.getElementById('explainText');
+
+  instructionDiv.id = 'instructionDiv';
+  gameName.id = 'gameName';
+  explainText.id = 'explainText';
 
   const skipGameBtn = document.getElementById('skipGameBtn');
   skipGameBtn.addEventListener('click', () => {
@@ -844,6 +876,7 @@ function displayRandomGame() {
           gamesContainer.style.display = 'none';
           returnGameFocusBtn.style.display = 'none';
           resumeTimer();
+          minimizeBtn.removeAttribute('disabled');
   });
 
   const skipExplainBtn = document.getElementById('skipExplainBtn');
@@ -853,17 +886,21 @@ function displayRandomGame() {
     selectedGame.play((gameFinished) => {
       if (gameFinished) {
         returnGameFocusBtn.style.display = 'none';
+        gamesContainer.id = 'gamesContainer';
         // Handle game finished logic here
         gamesContainer.innerHTML = `
           <div id="afterGame">
-            <p id="textEl">The task has finished. Do you want to play another? Or do you want to go back to focus?</p>
+            <p id="textEl">The task has finished. Do you want to complete another?</p>
             <div id="afterGameBtnEl">
-              <button id="playAnotherBtn">Play another</button>
+              <button id="playAnotherBtn">Complete Task</button>
               <button id="declineAnotherPlayBtn">Return to focus</button>
             </div>
             <div class="counter">20</div>
           </div>
         `;
+
+        const afterGameDiv = document.getElementById('afterGame');
+        afterGameDiv.id = 'afterGame';
 
         const counterDivs = document.querySelectorAll('.counter');
         counter(counterDivs);
@@ -879,6 +916,7 @@ function displayRandomGame() {
           timerContainer.style.display = 'block';
           timerDivEl.style.display = 'flex';
           gamesContainer.style.display = 'none';
+          minimizeBtn.removeAttribute('disabled');
           resumeTimer();
         });
       }

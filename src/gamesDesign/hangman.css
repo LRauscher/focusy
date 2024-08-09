@@ -1,0 +1,39 @@
+#hangman-game {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    margin: 20px auto;
+  }
+  
+  #hangman-game div {
+    margin: 10px 0;
+  }
+  
+  #hangman-game input {
+    font-size: 1.5em;
+    text-align: center;
+    padding: 5px;
+    margin-top: 15px;
+  }
+  
+  #hangman-game span {
+    font-size: 2em;
+    margin: 0 5px;
+  }
+  
+  #hangman-game #messageDiv {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: green;
+  }
+  
+  #hangman-game #highScoreDiv {
+    font-size: 1.2em;
+    margin-top: 15px;
+    color: #fc8c03;
+  }
+  
+  #hangman-game #attemptsDiv {
+    font-size: 1.2em;
+    margin-top: 15px;
+    color: #f00;
+  }  

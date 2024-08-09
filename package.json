@@ -1,8 +1,8 @@
 {
-  "name": "focusy",
-  "productName": "focusy",
+  "name": "Focusy",
+  "productName": "Focusy",
   "version": "1.0.0",
-  "description": "Focusy is a productivity app to help  you focus on your tasks.",
+  "description": "Focusy",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",

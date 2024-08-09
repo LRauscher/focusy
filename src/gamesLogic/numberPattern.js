@@ -2,28 +2,42 @@ import { updateHighScore, displayHighScore } from "../main.js";
 
 export function numberSequence(container, callback) {
     const sequences = [
-        { start: 1, step1: 2, step2: 3 }, { start: 3, step1: 3, step2: 2 }, 
-        { start: 10, step1: -2, step2: 2 }, { start: 5, step1: 5, step2: -3 },
-        { start: 2, step1: 4, step2: -1 }, { start: 100, step1: -1, step2: 1 }, 
-        { start: -1, step1: -3, step2: 3 }, { start: 0, step1: 0, step2: 1 },
-        { start: 1, step1: 0, step2: 1 }, { start: 10, step1: 1, step2: -1 },
-        { start: -5, step1: -5, step2: 5 }, { start: 4, step1: 2, step2: -2 },
-        { start: 7, step1: -3, step2: 1 }, { start: 2, step1: 0, step2: 2 },
-        // More sequences can be added here
+        { start: 2, step1: 2, step2: 3 }, { start: 1, step1: 1, step2: 2 }, 
+        { start: 5, step1: 3, step2: 2 }, { start: 10, step1: 2, step2: 3 }, 
+        { start: 3, step1: 2, step2: 1 }, { start: 7, step1: 3, step2: 2 }, 
+        { start: -1, step1: 2, step2: 3 }, { start: 0, step1: 1, step2: 2 }, 
+        { start: 4, step1: 2, step2: 3 }, { start: 6, step1: 1, step2: 2 }, 
+        { start: 8, step1: 3, step2: 2 }, { start: 2, step1: 1, step2: 3 },
+        { start: -2, step1: 2, step2: 1 }, { start: 3, step1: 3, step2: 2 }, 
+        { start: 9, step1: 2, step2: 1 }, { start: 1, step1: 2, step2: 3 }, 
+        { start: 4, step1: 3, step2: 1 }, { start: 5, step1: 1, step2: 2 },
+        { start: -3, step1: 3, step2: 2 }, { start: 0, step1: 2, step2: 3 }, 
+        { start: 7, step1: 1, step2: 2 }, { start: 6, step1: 2, step2: 3 }, 
+        { start: 2, step1: 3, step2: 2 }, { start: 1, step1: 1, step2: 3 },
+        { start: -1, step1: 2, step2: 1 }, { start: 4, step1: 3, step2: 2 },
+        { start: 3, step1: 1, step2: 3 }, { start: 8, step1: 2, step2: 3 }, 
+        { start: 0, step1: 3, step2: 1 }, { start: 5, step1: 2, step2: 3 },
+        { start: 7, step1: 3, step2: 2 }, { start: -2, step1: 1, step2: 3 }, 
+        { start: 6, step1: 2, step2: 1 }, { start: 10, step1: 1, step2: 2 }
     ];
 
     let currentSequenceIndex = 0;
     let userScore = 0;
 
+    function getRandomSequence() {
+        const randomIndex = Math.floor(Math.random() * sequences.length);
+        return sequences[randomIndex];
+    }
+
     function generateSequence() {
-        const sequence = sequences[currentSequenceIndex];
+        const sequence = getRandomSequence();
         const start = sequence.start;
         const step1 = sequence.step1;
         const step2 = sequence.step2;
         const length = 5;
         let currentSequence = [];
-        
-        // Generate the sequence with two steps
+
+        // Generate the sequence with two alternating steps
         for (let i = 0; i < length; i++) {
             if (i % 2 === 0) {
                 currentSequence.push(start + Math.floor(i / 2) * step1);
