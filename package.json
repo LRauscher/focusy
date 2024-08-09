@@ -1,7 +1,7 @@
 {
   "name": "Focusy",
   "productName": "Focusy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Focusy",
   "main": "src/index.js",
   "scripts": {
